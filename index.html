@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Telegram Web App</title>
+</head>
+<body>
+    <div id="user-data">
+        <p>Никнейм: <span id="username"></span></p>
+        <p>Баланс: <span id="balance"></span></p>
+    </div>
+    <textarea id="number-field" placeholder="Числа будут здесь"></textarea>
+    <button id="action-button">Отправить</button>
+
+    <script>
+        // Пример получения данных пользователя
+        async function fetchUserData() {
+            const response = await fetch('/api/user/data');
+            const data = await response.json();
+            document.getElementById('username').textContent = data.username;
+            document.getElementById('balance').textContent = data.balance;
+        }
+
+        // Обработка кнопки
+        document.getElementById('action-button').addEventListener('click', () => {
+            const numbers = document.getElementById('number-field').value;
+            console.log('Отправленные числа:', numbers);
+            // Отправка данных на сервер
+        });
+
+        fetchUserData();
+    </script>
+</body>
+</html>
